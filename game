@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>人權守護者 - Human Rights Defenders</title>
+    <title>BMI 身體質量指數計算器</title>
     <style>
         * {
             margin: 0;
@@ -12,181 +12,29 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #333;
+            padding: 20px;
         }
 
-        .game-container {
-            max-width: 1200px;
-            width: 95%;
-            background: rgba(255, 255, 255, 0.95);
+        .container {
+            background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .game-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            border-radius: 15px;
-            color: white;
-        }
-
-        .game-header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .game-header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-
-        .game-board {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            gap: 8px;
-            margin: 20px 0;
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .board-cell {
-            aspect-ratio: 1;
-            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            font-size: 0.8em;
-            text-align: center;
-            padding: 5px;
-        }
-
-        .board-cell:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .board-cell.start {
-            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
-            color: white;
-        }
-
-        .board-cell.challenge {
-            background: linear-gradient(135deg, #e17055 0%, #fdcb6e 100%);
-        }
-
-        .board-cell.opportunity {
-            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-            color: white;
-        }
-
-        .board-cell.goal {
-            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
-        }
-
-        .player-info {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 0;
-            gap: 15px;
-        }
-
-        .player-card {
-            flex: 1;
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-left: 5px solid #6c5ce7;
-        }
-
-        .player-card h3 {
-            color: #6c5ce7;
-            margin-bottom: 10px;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            margin: 10px 0;
-        }
-
-        .stat {
-            text-align: center;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            flex: 1;
-            margin: 0 5px;
-        }
-
-        .control-panel {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .event-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 15px 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-left: 5px solid #e17055;
-            display: none;
-        }
-
-        .event-card.active {
-            display: block;
-            animation: slideIn 0.5s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            animation: slideIn 0.5s ease-out;
         }
 
         @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
@@ -194,567 +42,564 @@
             }
         }
 
-        .dice {
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
             font-size: 2em;
-            margin: 0 10px;
-            animation: spin 0.5s ease;
         }
 
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .player-piece {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 2px solid white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .player1 { background: #e74c3c; }
-        .player2 { background: #3498db; }
-        .player3 { background: #2ecc71; }
-        .player4 { background: #f39c12; }
-
-        .scenario-panel {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            border: 2px solid #ddd;
-        }
-
-        .scenario-panel h3 {
-            color: #2d3436;
-            margin-bottom: 15px;
-        }
-
-        .choice-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .choice-btn {
-            flex: 1;
-            padding: 10px;
-            background: #74b9ff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .choice-btn:hover {
-            background: #0984e3;
-            transform: translateY(-2px);
-        }
-
-        .achievement-badge {
-            display: inline-block;
-            background: #00b894;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            margin: 2px;
-        }
-
-        .game-log {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px 0;
-            max-height: 200px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-        }
-
-        .log-entry {
-            padding: 5px 0;
-            border-bottom: 1px solid #eee;
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
             font-size: 0.9em;
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="number"] {
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            padding: 12px 50px 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fafafa;
         }
 
-        .modal-content {
-            background-color: white;
-            margin: 15% auto;
-            padding: 30px;
-            border-radius: 15px;
-            width: 80%;
-            max-width: 600px;
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .unit {
+            position: absolute;
+            right: 15px;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .gender-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .gender-option {
+            flex: 1;
+            position: relative;
+        }
+
+        .gender-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .gender-label {
+            display: block;
+            padding: 12px;
             text-align: center;
-            animation: modalAppear 0.3s ease;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fafafa;
         }
 
-        @keyframes modalAppear {
+        .gender-option input[type="radio"]:checked + .gender-label {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .gender-label:hover {
+            border-color: #667eea;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .calculate-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+
+        .calculate-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: scale(0.8);
             }
             to {
                 opacity: 1;
-                transform: scale(1);
             }
         }
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
+        .result-container.show {
+            display: block;
         }
 
-        .close:hover {
-            color: black;
+        .bmi-value {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .bmi-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #333;
+            display: block;
+        }
+
+        .bmi-category {
+            font-size: 1.5em;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .bmi-gauge {
+            position: relative;
+            height: 30px;
+            background: linear-gradient(to right, 
+                #3498db 0%, 
+                #2ecc71 25%, 
+                #f39c12 50%, 
+                #e74c3c 75%);
+            border-radius: 15px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .bmi-indicator {
+            position: absolute;
+            top: -10px;
+            width: 4px;
+            height: 50px;
+            background: #333;
+            border-radius: 2px;
+            transition: left 0.5s ease-out;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .bmi-scale {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .health-advice {
+            margin-top: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .health-advice h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .health-advice p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .underweight {
+            color: #3498db;
+        }
+
+        .normal {
+            color: #2ecc71;
+        }
+
+        .overweight {
+            color: #f39c12;
+        }
+
+        .obese {
+            color: #e74c3c;
+        }
+
+        .history {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            display: none;
+        }
+
+        .history.show {
+            display: block;
+        }
+
+        .history h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .history-item {
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-date {
+            font-size: 0.85em;
+            color: #888;
+        }
+
+        .clear-history {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .clear-history:hover {
+            background: #c82333;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .bmi-number {
+                font-size: 2.5em;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <div class="game-header">
-            <h1>🌍 人權守護者</h1>
-            <p>Human Rights Defenders - 透過遊戲學習人權價值</p>
+    <div class="container">
+        <h1>BMI 計算器</h1>
+        <p class="subtitle">計算你的身體質量指數</p>
+        
+        <div class="gender-selector">
+            <div class="gender-option">
+                <input type="radio" id="male" name="gender" value="male" checked>
+                <label for="male" class="gender-label">👨 男性</label>
+            </div>
+            <div class="gender-option">
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female" class="gender-label">👩 女性</label>
+            </div>
         </div>
-
-        <div class="player-info">
-            <div class="player-card">
-                <h3>👤 玩家1 - 記者</h3>
-                <div class="stats">
-                    <div class="stat">
-                        <strong>影響力</strong><br>
-                        <span id="player1-influence">50</span>
-                    </div>
-                    <div class="stat">
-                        <strong>資源</strong><br>
-                        <span id="player1-resources">30</span>
-                    </div>
-                    <div class="stat">
-                        <strong>聲望</strong><br>
-                        <span id="player1-reputation">40</span>
-                    </div>
-                </div>
-                <div id="player1-achievements"></div>
+        
+        <div class="input-group">
+            <label for="height">身高</label>
+            <div class="input-wrapper">
+                <input type="number" id="height" placeholder="請輸入身高" min="50" max="250" step="0.1">
+                <span class="unit">公分</span>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label for="weight">體重</label>
+            <div class="input-wrapper">
+                <input type="number" id="weight" placeholder="請輸入體重" min="10" max="300" step="0.1">
+                <span class="unit">公斤</span>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label for="age">年齡</label>
+            <div class="input-wrapper">
+                <input type="number" id="age" placeholder="請輸入年齡" min="1" max="120">
+                <span class="unit">歲</span>
+            </div>
+        </div>
+        
+        <button class="calculate-btn" onclick="calculateBMI()">計算 BMI</button>
+        
+        <div class="result-container" id="resultContainer">
+            <div class="bmi-value">
+                <span class="bmi-number" id="bmiValue">0</span>
+                <div class="bmi-category" id="bmiCategory"></div>
             </div>
             
-            <div class="player-card">
-                <h3>⚖️ 玩家2 - 律師</h3>
-                <div class="stats">
-                    <div class="stat">
-                        <strong>影響力</strong><br>
-                        <span id="player2-influence">45</span>
-                    </div>
-                    <div class="stat">
-                        <strong>資源</strong><br>
-                        <span id="player2-resources">40</span>
-                    </div>
-                    <div class="stat">
-                        <strong>聲望</strong><br>
-                        <span id="player2-reputation">35</span>
-                    </div>
-                </div>
-                <div id="player2-achievements"></div>
+            <div class="bmi-gauge">
+                <div class="bmi-indicator" id="bmiIndicator"></div>
+            </div>
+            
+            <div class="bmi-scale">
+                <span>過輕</span>
+                <span>正常</span>
+                <span>過重</span>
+                <span>肥胖</span>
+            </div>
+            
+            <div class="health-advice" id="healthAdvice">
+                <h3>健康建議</h3>
+                <p id="adviceText"></p>
             </div>
         </div>
-
-        <div class="game-board" id="gameBoard">
-            <!-- 遊戲棋盤將由JavaScript生成 -->
-        </div>
-
-        <div class="control-panel">
-            <button class="btn btn-primary" onclick="rollDice()">🎲 擲骰子</button>
-            <button class="btn btn-primary" onclick="showRules()">📋 遊戲規則</button>
-            <button class="btn btn-primary" onclick="resetGame()">🔄 重新開始</button>
-        </div>
-
-        <div class="event-card" id="eventCard">
-            <h3>🎯 人權挑戰</h3>
-            <p id="eventDescription">點擊擲骰子開始遊戲！</p>
-            <div class="choice-buttons" id="choiceButtons" style="display: none;">
-                <button class="choice-btn" onclick="makeChoice('A')">選擇 A</button>
-                <button class="choice-btn" onclick="makeChoice('B')">選擇 B</button>
-                <button class="choice-btn" onclick="makeChoice('C')">選擇 C</button>
-            </div>
-        </div>
-
-        <div class="game-log" id="gameLog">
-            <div class="log-entry">🎮 遊戲開始！歡迎來到人權守護者的世界</div>
-        </div>
-    </div>
-
-    <!-- 規則說明模態窗 -->
-    <div id="rulesModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>🎯 遊戲規則</h2>
-            <div style="text-align: left; margin: 20px 0;">
-                <h3>🎮 遊戲目標</h3>
-                <p>作為人權守護者，你的目標是通過各種行動和決策來維護人權，累積影響力、資源和聲望。</p>
-                
-                <h3>🎲 遊戲流程</h3>
-                <ol>
-                    <li>擲骰子移動棋子</li>
-                    <li>根據落地位置觸發不同事件</li>
-                    <li>面對人權挑戰並做出選擇</li>
-                    <li>獲得相應的獎勵或承擔後果</li>
-                    <li>累積成就，成為真正的人權守護者</li>
-                </ol>
-                
-                <h3>🏆 獲勝條件</h3>
-                <p>首先達到以下任一條件的玩家獲勝：</p>
-                <ul>
-                    <li>影響力達到 100 點</li>
-                    <li>獲得 5 個成就徽章</li>
-                    <li>完成一輪完整的棋盤旅程</li>
-                </ul>
-                
-                <h3>💡 人權主題</h3>
-                <p>遊戲涵蓋言論自由、平等權利、教育權、工作權、環境權等各種人權議題。</p>
-            </div>
+        
+        <div class="history" id="history">
+            <h3>📊 歷史記錄</h3>
+            <div id="historyList"></div>
+            <button class="clear-history" onclick="clearHistory()">清除記錄</button>
         </div>
     </div>
 
     <script>
-        // 遊戲狀態
-        let gameState = {
-            currentPlayer: 1,
-            players: {
-                1: { position: 0, influence: 50, resources: 30, reputation: 40, achievements: [] },
-                2: { position: 0, influence: 45, resources: 40, reputation: 35, achievements: [] }
-            },
-            gameLog: []
+        // 載入歷史記錄
+        let bmiHistory = JSON.parse(localStorage.getItem('bmiHistory')) || [];
+        
+        // 頁面載入時顯示歷史記錄
+        window.onload = function() {
+            updateHistoryDisplay();
+            
+            // 為輸入框添加即時驗證
+            document.getElementById('height').addEventListener('input', validateInput);
+            document.getElementById('weight').addEventListener('input', validateInput);
+            document.getElementById('age').addEventListener('input', validateInput);
         };
-
-        // 人權情境資料庫
-        const scenarios = [
-            {
-                title: "言論自由挑戰",
-                description: "一位記者因報導政府貪腐被威脅，你會如何支持他？",
-                choices: {
-                    A: { text: "公開聲援", influence: 15, reputation: 10, resources: -5 },
-                    B: { text: "私下協助", influence: 8, reputation: 5, resources: -3 },
-                    C: { text: "保持沉默", influence: -5, reputation: -10, resources: 0 }
-                }
-            },
-            {
-                title: "教育平等",
-                description: "偏遠地區兒童面臨教育資源不足，你決定採取什麼行動？",
-                choices: {
-                    A: { text: "募集資金建學校", influence: 12, reputation: 8, resources: -10 },
-                    B: { text: "推動政策改革", influence: 10, reputation: 12, resources: -5 },
-                    C: { text: "組織志工教學", influence: 8, reputation: 6, resources: -3 }
-                }
-            },
-            {
-                title: "勞工權益",
-                description: "工廠員工面臨惡劣工作環境和低薪，你會如何幫助他們？",
-                choices: {
-                    A: { text: "組織工會抗議", influence: 15, reputation: 5, resources: -8 },
-                    B: { text: "尋求法律途徑", influence: 10, reputation: 15, resources: -5 },
-                    C: { text: "媒體曝光", influence: 12, reputation: 8, resources: -3 }
-                }
-            },
-            {
-                title: "環境正義",
-                description: "化工廠污染威脅社區健康，居民求助無門，你的選擇是？",
-                choices: {
-                    A: { text: "發起環保運動", influence: 18, reputation: 12, resources: -10 },
-                    B: { text: "提起公益訴訟", influence: 15, reputation: 18, resources: -8 },
-                    C: { text: "協助居民搬遷", influence: 5, reputation: 8, resources: -15 }
-                }
-            },
-            {
-                title: "性別平等",
-                description: "女性員工遭受職場性騷擾，向你求助，你會如何處理？",
-                choices: {
-                    A: { text: "陪同報案", influence: 10, reputation: 15, resources: -5 },
-                    B: { text: "提供法律支援", influence: 12, reputation: 12, resources: -8 },
-                    C: { text: "組織支持團體", influence: 8, reputation: 10, resources: -3 }
-                }
-            },
-            {
-                title: "難民危機",
-                description: "大批難民需要人道援助，但面臨政治阻力，你的行動是？",
-                choices: {
-                    A: { text: "直接提供援助", influence: 20, reputation: 15, resources: -15 },
-                    B: { text: "遊說政府政策", influence: 15, reputation: 20, resources: -10 },
-                    C: { text: "發起募款活動", influence: 12, reputation: 10, resources: -5 }
-                }
-            }
-        ];
-
-        // 成就系統
-        const achievements = [
-            { name: "言論自由守護者", condition: "influence >= 70", badge: "🎤" },
-            { name: "平等權利倡導者", condition: "reputation >= 60", badge: "⚖️" },
-            { name: "資源整合專家", condition: "resources >= 50", badge: "💰" },
-            { name: "社區領導者", condition: "influence + reputation >= 100", badge: "👥" },
-            { name: "人權戰士", condition: "influence >= 80 && reputation >= 50", badge: "🛡️" }
-        ];
-
-        // 初始化遊戲棋盤
-        function initializeBoard() {
-            const board = document.getElementById('gameBoard');
-            const cellTypes = ['start', 'challenge', 'opportunity', 'challenge', 'goal', 'challenge', 'opportunity', 'challenge'];
+        
+        function validateInput(e) {
+            const value = parseFloat(e.target.value);
+            const id = e.target.id;
             
-            for (let i = 0; i < 64; i++) {
-                const cell = document.createElement('div');
-                cell.className = 'board-cell';
-                cell.id = `cell-${i}`;
-                
-                if (i === 0) {
-                    cell.classList.add('start');
-                    cell.innerHTML = '<div>🏠</div><div>起點</div>';
-                } else if (i % 8 === 0) {
-                    cell.classList.add('goal');
-                    cell.innerHTML = '<div>🎯</div><div>里程碑</div>';
-                } else if (i % 3 === 0) {
-                    cell.classList.add('challenge');
-                    cell.innerHTML = '<div>⚡</div><div>挑戰</div>';
-                } else if (i % 5 === 0) {
-                    cell.classList.add('opportunity');
-                    cell.innerHTML = '<div>💡</div><div>機會</div>';
-                } else {
-                    cell.innerHTML = '<div>📍</div><div>普通</div>';
-                }
-                
-                cell.addEventListener('click', () => cellClicked(i));
-                board.appendChild(cell);
+            let min, max;
+            switch(id) {
+                case 'height':
+                    min = 50; max = 250;
+                    break;
+                case 'weight':
+                    min = 10; max = 300;
+                    break;
+                case 'age':
+                    min = 1; max = 120;
+                    break;
             }
             
-            // 放置玩家棋子
-            updatePlayerPositions();
+            if (value < min || value > max) {
+                e.target.style.borderColor = '#e74c3c';
+            } else {
+                e.target.style.borderColor = '#e0e0e0';
+            }
         }
-
-        // 更新玩家位置
-        function updatePlayerPositions() {
-            // 清除所有棋子
-            document.querySelectorAll('.player-piece').forEach(piece => piece.remove());
+        
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const age = parseInt(document.getElementById('age').value);
+            const gender = document.querySelector('input[name="gender"]:checked').value;
             
-            // 重新放置棋子
-            Object.keys(gameState.players).forEach(playerId => {
-                const position = gameState.players[playerId].position;
-                const cell = document.getElementById(`cell-${position}`);
-                const piece = document.createElement('div');
-                piece.className = `player-piece player${playerId}`;
-                cell.appendChild(piece);
-            });
-        }
-
-        // 擲骰子
-        function rollDice() {
-            const dice = Math.floor(Math.random() * 6) + 1;
-            const player = gameState.players[gameState.currentPlayer];
-            
-            // 移動玩家
-            player.position = (player.position + dice) % 64;
-            updatePlayerPositions();
-            
-            // 觸發事件
-            const cellType = document.getElementById(`cell-${player.position}`).classList;
-            if (cellType.contains('challenge') || cellType.contains('opportunity')) {
-                showScenario();
-            } else if (cellType.contains('goal')) {
-                showMilestone();
+            // 驗證輸入
+            if (!height || !weight || !age) {
+                alert('請填寫所有欄位！');
+                return;
             }
             
-            // 記錄日誌
-            addToLog(`玩家${gameState.currentPlayer} 擲出 ${dice} 點，移動到位置 ${player.position}`);
+            if (height < 50 || height > 250) {
+                alert('請輸入合理的身高（50-250公分）');
+                return;
+            }
             
-            // 更新顯示
-            updatePlayerStats();
+            if (weight < 10 || weight > 300) {
+                alert('請輸入合理的體重（10-300公斤）');
+                return;
+            }
             
-            // 切換玩家
-            gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
-        }
-
-        // 顯示情境
-        function showScenario() {
-            const scenario = scenarios[Math.floor(Math.random() * scenarios.length)];
-            const eventCard = document.getElementById('eventCard');
-            const eventDescription = document.getElementById('eventDescription');
-            const choiceButtons = document.getElementById('choiceButtons');
+            if (age < 1 || age > 120) {
+                alert('請輸入合理的年齡（1-120歲）');
+                return;
+            }
             
-            eventCard.className = 'event-card active';
-            eventDescription.textContent = scenario.description;
-            choiceButtons.style.display = 'flex';
+            // 計算BMI
+            const heightInMeters = height / 100;
+            const bmi = weight / (heightInMeters * heightInMeters);
+            const bmiRounded = Math.round(bmi * 10) / 10;
             
-            // 儲存當前情境
-            gameState.currentScenario = scenario;
-        }
-
-        // 顯示里程碑
-        function showMilestone() {
-            const player = gameState.players[gameState.currentPlayer];
-            const bonus = {
-                influence: 10,
-                reputation: 8,
-                resources: 5
+            // 顯示結果
+            document.getElementById('bmiValue').textContent = bmiRounded;
+            document.getElementById('resultContainer').classList.add('show');
+            
+            // 判斷BMI類別
+            let category, categoryClass, advice, indicatorPosition;
+            
+            if (bmi < 18.5) {
+                category = '體重過輕';
+                categoryClass = 'underweight';
+                advice = '您的BMI顯示體重過輕。建議：\n• 增加營養攝取，特別是蛋白質和健康脂肪\n• 進行適度的肌力訓練來增加肌肉量\n• 定期進食，避免跳餐\n• 選擇營養密度高的食物\n• 如有需要，請諮詢營養師制定增重計劃';
+                indicatorPosition = (bmi / 18.5) * 25;
+            } else if (bmi < 24) {
+                category = '正常範圍';
+                categoryClass = 'normal';
+                advice = '恭喜！您的BMI在正常範圍內。建議：\n• 保持均衡飲食，多吃蔬果和全穀物\n• 每週至少150分鐘中等強度運動\n• 保持良好的睡眠習慣\n• 定期進行健康檢查\n• 持續維持健康的生活方式';
+                indicatorPosition = 25 + ((bmi - 18.5) / 5.5) * 25;
+            } else if (bmi < 27) {
+                category = '體重過重';
+                categoryClass = 'overweight';
+                advice = '您的BMI顯示體重過重。建議：\n• 控制每日熱量攝取\n• 增加有氧運動，如快走、游泳或騎自行車\n• 減少高糖、高脂肪食物的攝取\n• 增加蔬菜和水果的攝取量\n• 考慮尋求專業營養師的協助';
+                indicatorPosition = 50 + ((bmi - 24) / 3) * 25;
+            } else {
+                category = '肥胖';
+                categoryClass = 'obese';
+                advice = '您的BMI顯示肥胖。強烈建議：\n• 諮詢醫生或營養師制定減重計劃\n• 逐步增加日常活動量\n• 採用地中海飲食或其他健康飲食模式\n• 監測血壓、血糖等健康指標\n• 加入支持團體或尋求專業協助\n• 設定實際可行的減重目標';
+                indicatorPosition = Math.min(75 + ((bmi - 27) / 10) * 25, 95);
+            }
+            
+            // 根據性別和年齡調整建議
+            if (gender === 'female' && age > 50) {
+                advice += '\n\n針對您的情況，還建議注意骨質密度和補充鈣質。';
+            } else if (gender === 'male' && age > 40) {
+                advice += '\n\n針對您的情況，建議定期檢查心血管健康。';
+            }
+            
+            if (age < 18) {
+                advice = '注意：BMI標準主要適用於成年人。青少年應諮詢醫生了解適合的體重範圍。\n\n' + advice;
+            } else if (age > 65) {
+                advice += '\n\n年長者的理想BMI範圍可能略高，請諮詢醫生獲得個人化建議。';
+            }
+            
+            document.getElementById('bmiCategory').textContent = category;
+            document.getElementById('bmiCategory').className = 'bmi-category ' + categoryClass;
+            document.getElementById('adviceText').textContent = advice;
+            document.getElementById('adviceText').style.whiteSpace = 'pre-line';
+            
+            // 設定指示器位置
+            document.getElementById('bmiIndicator').style.left = indicatorPosition + '%';
+            
+            // 儲存到歷史記錄
+            const now = new Date();
+            const record = {
+                date: now.toLocaleDateString('zh-TW'),
+                time: now.toLocaleTimeString('zh-TW'),
+                bmi: bmiRounded,
+                category: category,
+                height: height,
+                weight: weight,
+                age: age,
+                gender: gender === 'male' ? '男' : '女'
             };
             
-            player.influence += bonus.influence;
-            player.reputation += bonus.reputation;
-            player.resources += bonus.resources;
+            bmiHistory.unshift(record);
+            if (bmiHistory.length > 10) {
+                bmiHistory = bmiHistory.slice(0, 10);
+            }
             
-            const eventCard = document.getElementById('eventCard');
-            const eventDescription = document.getElementById('eventDescription');
-            const choiceButtons = document.getElementById('choiceButtons');
+            localStorage.setItem('bmiHistory', JSON.stringify(bmiHistory));
+            updateHistoryDisplay();
             
-            eventCard.className = 'event-card active';
-            eventDescription.textContent = `🎉 恭喜！你達成了一個里程碑！獲得影響力+${bonus.influence}、聲望+${bonus.reputation}、資源+${bonus.resources}`;
-            choiceButtons.style.display = 'none';
-            
-            addToLog(`玩家${gameState.currentPlayer} 達成里程碑，獲得豐厚獎勵！`);
-            updatePlayerStats();
-            checkAchievements();
-        }
-
-        // 做出選擇
-        function makeChoice(choice) {
-            const scenario = gameState.currentScenario;
-            const player = gameState.players[gameState.currentPlayer];
-            const result = scenario.choices[choice];
-            
-            // 應用選擇結果
-            player.influence += result.influence;
-            player.reputation += result.reputation;
-            player.resources += result.resources;
-            
-            // 確保數值不為負
-            player.influence = Math.max(0, player.influence);
-            player.reputation = Math.max(0, player.reputation);
-            player.resources = Math.max(0, player.resources);
-            
-            // 隱藏事件卡
-            document.getElementById('eventCard').className = 'event-card';
-            document.getElementById('choiceButtons').style.display = 'none';
-            
-            // 記錄日誌
-            addToLog(`玩家${gameState.currentPlayer} 選擇了 ${choice}：${result.text}`);
-            
-            // 更新顯示
-            updatePlayerStats();
-            checkAchievements();
-            checkWinCondition();
-        }
-
-        // 檢查成就
-        function checkAchievements() {
-            const player = gameState.players[gameState.currentPlayer];
-            
-            achievements.forEach(achievement => {
-                if (!player.achievements.includes(achievement.name)) {
-                    // 簡化的成就檢查
-                    let earned = false;
-                    if (achievement.name === "言論自由守護者" && player.influence >= 70) earned = true;
-                    if (achievement.name === "平等權利倡導者" && player.reputation >= 60) earned = true;
-                    if (achievement.name === "資源整合專家" && player.resources >= 50) earned = true;
-                    if (achievement.name === "社區領導者" && (player.influence + player.reputation) >= 100) earned = true;
-                    if (achievement.name === "人權戰士" && player.influence >= 80 && player.reputation >= 50) earned = true;
-                    
-                    if (earned) {
-                        player.achievements.push(achievement.name);
-                        addToLog(`🏆 玩家${gameState.currentPlayer} 獲得成就：${achievement.name}`);
-                        
-                        // 顯示成就徽章
-                        const achievementDiv = document.getElementById(`player${gameState.currentPlayer}-achievements`);
-                        const badge = document.createElement('span');
-                        badge.className = 'achievement-badge';
-                        badge.textContent = `${achievement.badge} ${achievement.name}`;
-                        achievementDiv.appendChild(badge);
-                    }
-                }
+            // 平滑滾動到結果
+            document.getElementById('resultContainer').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'nearest' 
             });
         }
-
-        // 檢查獲勝條件
-        function checkWinCondition() {
-            const player = gameState.players[gameState.currentPlayer];
+        
+        function updateHistoryDisplay() {
+            if (bmiHistory.length === 0) {
+                document.getElementById('history').classList.remove('show');
+                return;
+            }
             
-            if (player.influence >= 100) {
-                showWinModal(`玩家${gameState.currentPlayer} 憑藉卓越的影響力獲勝！`);
-            } else if (player.achievements.length >= 5) {
-                showWinModal(`玩家${gameState.currentPlayer} 憑藉眾多成就獲勝！`);
-            } else if (player.position === 0 && gameState.gameLog.length > 10) {
-                showWinModal(`玩家${gameState.currentPlayer} 完成人權守護之旅獲勝！`);
+            document.getElementById('history').classList.add('show');
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = '';
+            
+            bmiHistory.forEach(record => {
+                const item = document.createElement('div');
+                item.className = 'history-item';
+                
+                let categoryClass = '';
+                if (record.bmi < 18.5) categoryClass = 'underweight';
+                else if (record.bmi < 24) categoryClass = 'normal';
+                else if (record.bmi < 27) categoryClass = 'overweight';
+                else categoryClass = 'obese';
+                
+                item.innerHTML = `
+                    <div>
+                        <strong class="${categoryClass}">BMI ${record.bmi}</strong>
+                        <span style="color: #666; margin-left: 10px;">${record.category}</span>
+                        <div class="history-date">${record.date} ${record.time}</div>
+                    </div>
+                    <div style="text-align: right; font-size: 0.9em; color: #888;">
+                        ${record.gender} ${record.age}歲<br>
+                        ${record.height}cm / ${record.weight}kg
+                    </div>
+                `;
+                historyList.appendChild(item);
+            });
+        }
+        
+        function clearHistory() {
+            if (confirm('確定要清除所有歷史記錄嗎？')) {
+                bmiHistory = [];
+                localStorage.removeItem('bmiHistory');
+                document.getElementById('history').classList.remove('show');
             }
         }
-
-        // 顯示獲勝模態窗
-        function showWinModal(message) {
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            modal.style.display = 'block';
-            modal.innerHTML = `
-                <div class="modal-content">
-                    <h2>🎉 遊戲結束！</h2>
-                    <p style="font-size: 1.2em; margin: 20px 0;">${message}</p>
-                    <button class="btn btn-primary" onclick="resetGame(); this.parentElement.parentElement.remove();">重新開始</button>
-                </div>
-            `;
-            document.body.appendChild(modal);
-        }
-
-        // 更新玩家統計
-        function updatePlayerStats() {
-            Object.keys(gameState.players).forEach(playerId => {
-                const player = gameState.players[playerId];
-                document.getElementById(`player${playerId}-influence`).textContent = player.influence;
-                document.getElementById(`player${playerId}-resources`).textContent = player.resources;
-                document.getElementById(`player${playerId}-reputation`).textContent = player.reputation;
-            });
-        }
-
-        // 添加到遊戲日誌
-        function addToLog(message) {
-            const log = document.getElementById('gameLog');
-            const entry = document.createElement('div');
-            entry.className = 'log-entry';
-            entry.textContent = message;
-            log.appendChild(entry);
-            log.scrollTop = log.scrollHeight;
-        }
-
-        // 顯示規則
-        function showRules() {
-            document.getElementById('rulesModal').style.display = 'block';
-        }
-
-        // 關閉模態窗
-        function closeModal() {
-            document.getElementById('rulesModal').style.display = 'none';
-        }
-
-        // 重置遊戲
-        function resetGame() {
-            gameState = {
-                currentPlayer: 1,
-                players: {
-                    1: { position: 0, influence: 50, resources: 30, reputation: 40, achievements: [] },
-                    2: { position: 0, influence: 45, resources: 40, reputation: 35, achievements: [] }
-                },
-                gameLog: []
-            };
-            
-            document.getElementById('gameLog').innerHTML = '<div class="log-entry">🎮 遊戲重新開始！</div>';
-            document.getElementById('player1-achievements').innerHTML = '';
-            document.getElementById('
+        
+        // Enter鍵觸發計算
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateBMI();
+            }
+        });
+    </script>
+</body>
+</html>
